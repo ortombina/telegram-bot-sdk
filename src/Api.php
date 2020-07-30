@@ -233,7 +233,7 @@ class Api
      *   'disable_web_page_preview' => '',
      *   'disable_notification'     => '',
      *   'reply_to_message_id'      => '',
-     *   'reply_markup'             => '',
+     *   'reply_markup'             => '',Upfare
      * ];
      * </code>
      *
@@ -256,6 +256,34 @@ class Api
     public function sendMessage(array $params)
     {
         $response = $this->post('sendMessage', $params);
+
+        return new Message($response->getDecodedBody());
+    }
+
+    /**
+     * Delete text messages.
+     *
+     * <code>
+     * $params = [
+     *   'chat_id'                  => '',
+     *   'message_id'               => '',
+     *   'reply_markup'             => '',
+     * ];
+     * </code>
+     *
+     * @link https://core.telegram.org/bots/api#deleteMessage
+     *
+     * @param array    $params
+     *
+     * @var int|string $params ['chat_id']
+     * @var int|string $params ['message_id']
+     * @var string     $params ['reply_markup']
+     *
+     * @return Message
+     */
+    public function deleteMessage(array $params)
+    {
+        $response = $this->post('deleteMessage', $params);
 
         return new Message($response->getDecodedBody());
     }
